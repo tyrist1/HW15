@@ -1,6 +1,6 @@
 import sqlite3  #, #jsonfy
 import json
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
@@ -18,17 +18,17 @@ def vasya(itemid):
     result=cur.fetchall()
     con.close()
 
-    if len(result)==1:
-        line=result[0]
-        data = {
-            "1": line[0],
-            "2": line[1],
-            "3": line[2],
-
-        }
-    else:
-        data ={}
-    return json.dumps(data)
+    # if len(result)==1:  в случае если надо офрмить вывод красиво
+    #     line=result[0]
+    #     data = {
+    #         "1": line[0],
+    #         "2": line[1],
+    #         "3": line[2],
+    #
+    #     }
+    # else:
+    #     data ={}
+    return jsonify(result)
 
 app.run()
 
